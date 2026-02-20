@@ -186,7 +186,7 @@ export default function JobModal() {
                 tagsStyles={{
                   h1: { fontSize: 22, fontWeight: "700", marginVertical: 6 },
                   h2: { fontSize: 20, fontWeight: "700", marginVertical: 6 },
-                  h3: { fontSize: 18, fontWeight: "700", marginVertical: 10 },
+                  h3: { fontSize: 18, fontWeight: "700", marginVertical: 6 },
                   p: { fontSize: 16, marginVertical: 4 },
                   li: { fontSize: 14, marginVertical: 2, marginLeft: 16 },
                   ul: { marginVertical: 10, marginHorizontal: 6 },
