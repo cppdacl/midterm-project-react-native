@@ -1,0 +1,182 @@
+[
+  {
+    "id": "1",
+    "name": "Wireless Headphones",
+    "price": 5200,
+    "sold": 20,
+    "image": "https://down-ph.img.susercontent.com/file/sg-11134201-22110-ojl7zli6f2jv8d.webp",
+    "shipping": {
+      "minShippingDay": 2,
+      "maxShippingDay": 5,
+      "location": "Philippines"
+    }
+  },
+  {
+    "id": "2",
+    "name": "Smart Watch",
+    "price": 3200,
+    "sold": 15,
+    "image": "https://down-ph.img.susercontent.com/file/ph-11134201-81zti-mkax3kh7ngubc3@resize_w450_nl.webp",
+    "shipping": {
+      "minShippingDay": 3,
+      "maxShippingDay": 7,
+      "location": "Philippines"
+    }
+  },
+  {
+    "id": "3",
+    "name": "Portable Speaker",
+    "price": 4500,
+    "sold": 12,
+    "image": "https://down-ph.img.susercontent.com/file/ph-11134207-7r98y-lvdzktsc2erz9f@resize_w450_nl.webp",
+    "shipping": {
+      "minShippingDay": 4,
+      "maxShippingDay": 6,
+      "location": "Philippines"
+    }
+  },
+  {
+    "id": "4",
+    "name": "Gaming Mouse",
+    "price": 2200,
+    "sold": 25,
+    "image": "https://down-ph.img.susercontent.com/file/ph-11134207-81zte-mgg569qbn11lbf@resize_w450_nl.webp",
+    "shipping": {
+      "minShippingDay": 1,
+      "maxShippingDay": 3,
+      "location": "Philippines"
+    }
+  },
+  {
+    "id": "5",
+    "name": "Mechanical Keyboard",
+    "price": 7500,
+    "sold": 18,
+    "image": "https://down-ph.img.susercontent.com/file/ph-11134207-81ztn-mf4ud1la1bt52e@resize_w450_nl.webp",
+    "shipping": {
+      "minShippingDay": 2,
+      "maxShippingDay": 4,
+      "location": "Philippines"
+    }
+  },
+  {
+    "id": "6",
+    "name": "Action Camera",
+    "price": 8900,
+    "sold": 10,
+    "image": "https://down-ph.img.susercontent.com/file/ph-11134207-7rasg-m8vt04awh7hvcd@resize_w450_nl.webp",
+    "shipping": {
+      "minShippingDay": 3,
+      "maxShippingDay": 6,
+      "location": "Philippines"
+    }
+  },
+  {
+    "id": "7",
+    "name": "Fitness Tracker",
+    "price": 2800,
+    "sold": 30,
+    "image": "https://down-ph.img.susercontent.com/file/8c0b2f7539fa9bc1fa562638177b1956@resize_w450_nl.webp",
+    "shipping": {
+      "minShippingDay": 2,
+      "maxShippingDay": 5,
+      "location": "Philippines"
+    }
+  },
+  {
+    "id": "8",
+    "name": "Bluetooth Earbuds",
+    "price": 3500,
+    "sold": 40,
+    "image": "https://down-ph.img.susercontent.com/file/sg-11134201-7rdxj-m0ld9b8xv66a7b@resize_w450_nl.webp",
+    "shipping": {
+      "minShippingDay": 1,
+      "maxShippingDay": 4,
+      "location": "Philippines"
+    }
+  },
+  {
+    "id": "9",
+    "name": "Drone",
+    "price": 15000,
+    "sold": 5,
+    "image": "https://down-ph.img.susercontent.com/file/ph-11134207-7rasf-m4y0rbo37gcuf4@resize_w450_nl.webp",
+    "shipping": {
+      "minShippingDay": 5,
+      "maxShippingDay": 10,
+      "location": "Philippines"
+    }
+  },
+  {
+    "id": "10",
+    "name": "VR Headset",
+    "price": 22000,
+    "sold": 7,
+    "image": "https://down-ph.img.susercontent.com/file/ph-11134207-7rasg-m20m9mm2nx2v63@resize_w450_nl.webp",
+    "shipping": {
+      "minShippingDay": 3,
+      "maxShippingDay": 7,
+      "location": "Philippines"
+    }
+  },
+  {
+    "id": "11",
+    "name": "Smartphone Gimbal",
+    "price": 6200,
+    "sold": 12,
+    "image": "https://down-ph.img.susercontent.com/file/ph-11134207-7rasi-m6du60c27tofe0@resize_w450_nl.webp",
+    "shipping": {
+      "minShippingDay": 2,
+      "maxShippingDay": 5,
+      "location": "Philippines"
+    }
+  },
+  {
+    "id": "12",
+    "name": "Portable Charger",
+    "price": 1800,
+    "sold": 50,
+    "image": "https://down-ph.img.susercontent.com/file/ph-11134207-81ztf-mj6p8jqek5q93b.webp",
+    "shipping": {
+      "minShippingDay": 1,
+      "maxShippingDay": 3,
+      "location": "Philippines"
+    }
+  },
+  {
+    "id": "13",
+    "name": "Smart Home Hub",
+    "price": 9800,
+    "sold": 8,
+    "image": "https://down-ph.img.susercontent.com/file/ph-11134207-81ztl-miu4ej1xnt38cf@resize_w450_nl.webp",
+    "shipping": {
+      "minShippingDay": 4,
+      "maxShippingDay": 7,
+      "location": "Philippines"
+    }
+  },
+  {
+    "id": "14",
+    "name": "LED Desk Lamp",
+    "price": 2500,
+    "sold": 22,
+    "image": "https://down-ph.img.susercontent.com/file/ph-11134207-7rase-m6ggj4wa0bgf5a@resize_w450_nl.webp",
+    "shipping": {
+      "minShippingDay": 2,
+      "maxShippingDay": 4,
+      "location": "Philippines"
+    }
+  },
+  {
+    "id": "15",
+    "name": "Noise Cancelling Headphones",
+    "price": 10500,
+    "sold": 14,
+    "image": "https://down-ph.img.susercontent.com/file/ph-11134207-81ztl-meslwnq31fk1b7@resize_w450_nl.webp",
+    "shipping": {
+      "minShippingDay": 3,
+      "maxShippingDay": 6,
+      "location": "Philippines"
+    }
+  }
+]
