@@ -3,6 +3,7 @@ import { Linking, Text, TouchableOpacity, View, Image } from "react-native";
 import { useTheme } from "../../providers/ThemeContext";
 import { Job } from "../../providers/JobsContext";
 import { useSavedJobs } from "../../providers/SavedContext";
+import { useJobView } from "../../providers/JobViewContext"; // for opening modal
 import { styles } from "./styles";
 
 type Props = {
@@ -21,6 +22,7 @@ const toTitleCase = (text?: string) => {
 export default function JobCard({ job }: Props) {
   const { theme, dark } = useTheme();
   const { saveJob, removeJob, isJobSaved } = useSavedJobs();
+  const { openJob } = useJobView();
 
   const saved = isJobSaved(job.uuid);
 
@@ -47,7 +49,9 @@ export default function JobCard({ job }: Props) {
       : "* Salary Not Disclosed";
 
   return (
-    <View
+    <TouchableOpacity
+      activeOpacity={0.9}
+      onPress={() => openJob(job.uuid)} // open modal on card press
       style={[styles.card, { backgroundColor: dark ? "#1B1826" : "#F3F4F6" }]}
     >
       {/* Top Row */}
@@ -95,23 +99,33 @@ export default function JobCard({ job }: Props) {
 
       {/* Buttons */}
       <View style={styles.buttonRow}>
+        {/* Save Button */}
         <TouchableOpacity
+          activeOpacity={0.8}
           style={[
             styles.saveButton,
             { backgroundColor: saved ? theme.primary : "#6d6b74" },
           ]}
-          onPress={() => (saved ? removeJob(job.uuid) : saveJob(job.uuid))}
+          onPress={(e) => {
+            e.stopPropagation(); // prevents triggering card onPress
+            saved ? removeJob(job.uuid) : saveJob(job.uuid);
+          }}
         >
           <Text style={styles.buttonText}>{saved ? "Saved" : "Save Job"}</Text>
         </TouchableOpacity>
 
+        {/* Apply Button */}
         <TouchableOpacity
+          activeOpacity={0.8}
           style={styles.applyButton}
-          onPress={() => Linking.openURL(job.applicationLink)}
+          onPress={(e) => {
+            e.stopPropagation(); // prevents triggering card onPress
+            Linking.openURL(job.applicationLink);
+          }}
         >
           <Text style={styles.applyText}>Apply</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

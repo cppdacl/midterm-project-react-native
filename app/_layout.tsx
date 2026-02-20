@@ -7,6 +7,7 @@ import { JobsProvider } from "./providers/JobsContext";
 import { ThemeProviderCustom } from "./providers/ThemeContext";
 import { ToastProvider } from "./providers/ToastContext";
 import { SavedProvider } from "./providers/SavedContext";
+import { JobViewProvider } from "./providers/JobViewContext";
 
 export const unstable_settings = {
   anchor: "(tabs)",
@@ -31,10 +32,15 @@ export default function RootLayout() {
         <ToastProvider>
           <JobsProvider>
             <SavedProvider>
-              <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              </Stack>
-              <StatusBar style="dark" />
+              <JobViewProvider>
+                <Stack>
+                  <Stack.Screen
+                    name="(tabs)"
+                    options={{ headerShown: false }}
+                  />
+                </Stack>
+                <StatusBar style="dark" />
+              </JobViewProvider>
             </SavedProvider>
           </JobsProvider>
         </ToastProvider>
