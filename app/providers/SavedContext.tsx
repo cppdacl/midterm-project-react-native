@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
+import { useToast } from "../providers/ToastContext";
 
 type SavedContextType = {
   savedJobUUIDs: string[];
@@ -11,13 +12,16 @@ type SavedContextType = {
 const SavedContext = createContext<SavedContextType>(null as any);
 
 export function SavedProvider({ children }: { children: React.ReactNode }) {
+  const { showToast } = useToast();
   const [savedJobUUIDs, setSavedJobUUIDs] = useState<string[]>([]);
 
   const saveJob = (uuid: string) => {
+    showToast("Job Saved!");
     setSavedJobUUIDs((prev) => (prev.includes(uuid) ? prev : [...prev, uuid]));
   };
 
   const removeJob = (uuid: string) => {
+    showToast("Job Unsaved!");
     setSavedJobUUIDs((prev) => prev.filter((id) => id !== uuid));
   };
 

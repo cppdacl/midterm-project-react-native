@@ -11,7 +11,6 @@ export default function Toast({ message }: ToastProps) {
   const [opacity] = React.useState(new Animated.Value(0));
 
   React.useEffect(() => {
-    // Animate in
     Animated.parallel([
       Animated.timing(translateY, {
         toValue: 0,
@@ -25,7 +24,6 @@ export default function Toast({ message }: ToastProps) {
       }),
     ]).start();
 
-    // Animate out after 600ms
     const timeout = setTimeout(() => {
       Animated.parallel([
         Animated.timing(translateY, {
