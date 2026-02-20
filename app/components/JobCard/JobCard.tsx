@@ -25,7 +25,9 @@ export default function JobCard({ job }: Props) {
 
   const salary =
     job.minSalary && job.maxSalary
-      ? `${job.currency} ${job.minSalary.toLocaleString()} - ${job.maxSalary.toLocaleString()}`
+      ? job.minSalary === job.maxSalary
+        ? `${job.currency} ${job.minSalary.toLocaleString()}`
+        : `${job.currency} ${job.minSalary.toLocaleString()} - ${job.maxSalary.toLocaleString()}`
       : "* Salary Not Disclosed";
 
   return (
