@@ -23,11 +23,23 @@ export default function JobCard({ job }: Props) {
   const { theme, dark } = useTheme();
   const router = useRouter();
 
+  const formatSalary = (currency: string, amount: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
+
   const salary =
     job.minSalary && job.maxSalary
       ? job.minSalary === job.maxSalary
-        ? `${job.currency} ${job.minSalary.toLocaleString()}`
-        : `${job.currency} ${job.minSalary.toLocaleString()} - ${job.maxSalary.toLocaleString()}`
+        ? formatSalary(job.currency, job.minSalary)
+        : `${formatSalary(job.currency, job.minSalary)} - ${formatSalary(
+            job.currency,
+            job.maxSalary,
+          )}`
       : "* Salary Not Disclosed";
 
   return (
