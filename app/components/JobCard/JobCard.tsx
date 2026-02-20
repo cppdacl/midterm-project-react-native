@@ -1,9 +1,8 @@
-import { Feather } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import React from "react";
-import { Image, Linking, Text, TouchableOpacity, View } from "react-native";
-import { Job } from "../../providers/JobsContext";
+import { Ionicons } from "@expo/vector-icons";
+import { Linking, Text, TouchableOpacity, View, Image } from "react-native";
 import { useTheme } from "../../providers/ThemeContext";
+import { Job } from "../../providers/JobsContext";
+import { useSavedJobs } from "../../providers/SavedContext";
 import { styles } from "./styles";
 
 type Props = {
@@ -21,31 +20,37 @@ const toTitleCase = (text?: string) => {
 
 export default function JobCard({ job }: Props) {
   const { theme, dark } = useTheme();
-  const router = useRouter();
+  const { saveJob, removeJob, isJobSaved } = useSavedJobs();
 
-  const formatSalary = (currency: string, amount: number) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency,
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(amount);
-  };
+  const saved = isJobSaved(job.uuid);
 
   const salary =
     job.minSalary && job.maxSalary
       ? job.minSalary === job.maxSalary
-        ? formatSalary(job.currency, job.minSalary)
-        : `${formatSalary(job.currency, job.minSalary)} - ${formatSalary(
-            job.currency,
-            job.maxSalary,
-          )}`
+        ? new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: job.currency,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          }).format(job.minSalary)
+        : `${new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: job.currency,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          }).format(job.minSalary)} - ${new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: job.currency,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          }).format(job.maxSalary)}`
       : "* Salary Not Disclosed";
 
   return (
     <View
       style={[styles.card, { backgroundColor: dark ? "#1B1826" : "#F3F4F6" }]}
     >
+      {/* Top Row */}
       <View style={styles.topRow}>
         <Image
           source={{ uri: job.companyLogo }}
@@ -66,6 +71,7 @@ export default function JobCard({ job }: Props) {
         </View>
       </View>
 
+      {/* Details */}
       <View style={styles.details}>
         <Text style={[styles.meta, { color: theme.text }]}>
           {toTitleCase(job.workModel)} • {toTitleCase(job.jobType)} •{" "}
@@ -73,12 +79,12 @@ export default function JobCard({ job }: Props) {
         </Text>
 
         {job.locations?.length > 0 && (
-          <View style={styles.locationRow}>
-            <Feather
-              name="globe"
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Ionicons
+              name="location-outline"
               size={14}
               color={theme.placeholder}
-              style={{ marginRight: 6, marginBottom: 3.5 }}
+              style={{ marginRight: 4 }}
             />
             <Text style={[styles.meta, { color: theme.placeholder }]}>
               {job.locations[0]}
@@ -90,9 +96,13 @@ export default function JobCard({ job }: Props) {
       {/* Buttons */}
       <View style={styles.buttonRow}>
         <TouchableOpacity
-          style={[styles.saveButton, { backgroundColor: "#605e66" }]}
+          style={[
+            styles.saveButton,
+            { backgroundColor: saved ? theme.primary : "#6d6b74" },
+          ]}
+          onPress={() => (saved ? removeJob(job.uuid) : saveJob(job.uuid))}
         >
-          <Text style={styles.buttonText}>{false ? "Saved" : "Save Job"}</Text>
+          <Text style={styles.buttonText}>{saved ? "Saved" : "Save Job"}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
