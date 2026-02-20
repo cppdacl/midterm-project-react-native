@@ -3,9 +3,8 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
-import { CartProvider } from "./providers/CartContext";
+import { JobsProvider } from "./providers/JobsContext";
 import { ThemeProviderCustom } from "./providers/ThemeContext";
-import { CheckoutSelectionProvider } from "./providers/CheckoutContext";
 import { ToastProvider } from "./providers/ToastContext";
 
 export const unstable_settings = {
@@ -29,14 +28,12 @@ export default function RootLayout() {
     <ThemeProvider value={LightTheme}>
       <ThemeProviderCustom>
         <ToastProvider>
-          <CartProvider>
-            <CheckoutSelectionProvider>
-              <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              </Stack>
-            </CheckoutSelectionProvider>
+          <JobsProvider>
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            </Stack>
             <StatusBar style="dark" />
-          </CartProvider>
+          </JobsProvider>
         </ToastProvider>
       </ThemeProviderCustom>
     </ThemeProvider>

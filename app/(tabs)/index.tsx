@@ -1,39 +1,32 @@
+import { Feather } from "@expo/vector-icons";
+import { useState } from "react";
 import {
-  View,
   FlatList,
+  StatusBar,
   Text,
   TouchableOpacity,
-  StatusBar,
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useState } from "react";
-import { Ionicons, Feather } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-
-import products from "../../assets/store.json";
-import ProductCard from "../components/ProductCard";
-import SearchBar from "../components/SearchBar";
 import { useTheme } from "../providers/ThemeContext";
-import { useCart } from "../providers/CartContext";
+
+import JobCard from "../components/JobCard/JobCard";
+import SearchBar from "../components/SearchBar/SearchBar";
+import { useJobs } from "../providers/JobsContext";
 
 export default function HomeScreen() {
   const { theme, dark, setDark } = useTheme();
-  const { items } = useCart();
+  const { jobs, loading } = useJobs();
   const [query, setQuery] = useState("");
-  const router = useRouter();
 
-  const filteredProducts = products.filter((item) =>
-    item.name.toLowerCase().includes(query.toLowerCase()),
+  const filteredJobs = jobs.filter((job) =>
+    job.title.toLowerCase().includes(query.toLowerCase()),
   );
-
-  const cartQuantity = items.length;
 
   const toggleTheme = () => setDark(!dark);
 
   return (
-    <SafeAreaView
-      style={{ backgroundColor: theme.background, paddingBottom: 0 }}
-    >
+    <SafeAreaView style={{ backgroundColor: theme.background }}>
       <StatusBar
         barStyle={dark ? "light-content" : "dark-content"}
         backgroundColor={theme.background}
@@ -45,81 +38,47 @@ export default function HomeScreen() {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          paddingHorizontal: 12,
+          paddingHorizontal: 16,
           marginTop: 12,
-          marginBottom: 8,
+          marginBottom: 16,
         }}
       >
         <Text style={{ fontSize: 32, fontWeight: "700", color: theme.text }}>
-          Home
+          Jobs
         </Text>
 
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          {/* Theme Toggle */}
-          <TouchableOpacity
-            onPress={toggleTheme}
-            style={{
-              marginRight: 12,
-              padding: 8,
-              borderRadius: 12,
-              backgroundColor: dark ? "#303030" : "#E5E7EB",
-            }}
-          >
-            {dark ? (
-              <Feather name="sun" size={20} color="#e7e7e7" />
-            ) : (
-              <Feather name="moon" size={20} color="#1F2937" />
-            )}
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => router.push("/cart")}
-            style={{ padding: 8 }}
-          >
-            <View>
-              <Ionicons name="cart-outline" size={28} color={theme.text} />
-
-              {cartQuantity > 0 && (
-                <View
-                  style={{
-                    position: "absolute",
-                    top: -6,
-                    right: -6,
-                    minWidth: 18,
-                    height: 18,
-                    borderRadius: 9,
-                    paddingHorizontal: cartQuantity < 10 ? 0 : 6,
-                    backgroundColor: "#7C3AED",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Text
-                    style={{ color: "#fff", fontSize: 12, fontWeight: "700" }}
-                  >
-                    {cartQuantity}
-                  </Text>
-                </View>
-              )}
-            </View>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          onPress={toggleTheme}
+          style={{
+            padding: 8,
+            borderRadius: 12,
+            backgroundColor: dark ? "#303030" : "#E5E7EB",
+          }}
+        >
+          {dark ? (
+            <Feather name="sun" size={20} color="#e7e7e7" />
+          ) : (
+            <Feather name="moon" size={20} color="#1F2937" />
+          )}
+        </TouchableOpacity>
       </View>
 
       <SearchBar value={query} onChange={setQuery} />
 
-      <FlatList
-        data={filteredProducts}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <ProductCard item={item} />}
-        numColumns={2}
-        columnWrapperStyle={{
-          justifyContent: "space-between",
-          paddingHorizontal: 12,
-        }}
-        contentContainerStyle={{ paddingBottom: 0 }}
-        showsVerticalScrollIndicator={false}
-      />
+      {loading ? (
+        <Text style={{ padding: 16, color: theme.text }}>Loading jobs...</Text>
+      ) : (
+        <FlatList
+          data={filteredJobs}
+          keyExtractor={(item) => item.uuid}
+          renderItem={({ item }) => <JobCard job={item} />}
+          contentContainerStyle={{
+            paddingHorizontal: 10,
+            paddingBottom: 30,
+          }}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
     </SafeAreaView>
   );
 }

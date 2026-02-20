@@ -1,30 +1,17 @@
 import React from "react";
-import { View, Text, Animated } from "react-native";
+import { Animated, Text } from "react-native";
+import { styles } from "./styles";
 
-export default function ToastContainer({ toasts }: { toasts: any[] }) {
-  return (
-    <View
-      pointerEvents="box-none"
-      style={{
-        position: "absolute",
-        bottom: 50,
-        left: 0,
-        right: 0,
-        alignItems: "center",
-      }}
-    >
-      {toasts.map((toast) => (
-        <Toast key={toast.id} message={toast.message} />
-      ))}
-    </View>
-  );
+interface ToastProps {
+  message: string;
 }
 
-function Toast({ message }: { message: string }) {
+export default function Toast({ message }: ToastProps) {
   const [translateY] = React.useState(new Animated.Value(20));
   const [opacity] = React.useState(new Animated.Value(0));
 
   React.useEffect(() => {
+    // Animate in
     Animated.parallel([
       Animated.timing(translateY, {
         toValue: 0,
@@ -38,6 +25,7 @@ function Toast({ message }: { message: string }) {
       }),
     ]).start();
 
+    // Animate out after 600ms
     const timeout = setTimeout(() => {
       Animated.parallel([
         Animated.timing(translateY, {
@@ -58,17 +46,9 @@ function Toast({ message }: { message: string }) {
 
   return (
     <Animated.View
-      style={{
-        marginVertical: 4,
-        paddingHorizontal: 16,
-        paddingVertical: 10,
-        backgroundColor: "#7C3AED",
-        borderRadius: 20,
-        opacity,
-        transform: [{ translateY }],
-      }}
+      style={[styles.toast, { opacity, transform: [{ translateY }] }]}
     >
-      <Text style={{ color: "white", fontWeight: "600" }}>{message}</Text>
+      <Text style={styles.toastText}>{message}</Text>
     </Animated.View>
   );
 }
