@@ -8,6 +8,7 @@ import { ThemeProviderCustom } from "./providers/ThemeContext";
 import { ToastProvider } from "./providers/ToastContext";
 import { SavedProvider } from "./providers/SavedContext";
 import { JobViewProvider } from "./providers/JobViewContext";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export const unstable_settings = {
   anchor: "(tabs)",
@@ -27,24 +28,26 @@ const LightTheme = {
 
 export default function RootLayout() {
   return (
-    <ThemeProvider value={LightTheme}>
-      <ThemeProviderCustom>
-        <ToastProvider>
-          <JobsProvider>
-            <SavedProvider>
-              <JobViewProvider>
-                <Stack>
-                  <Stack.Screen
-                    name="(tabs)"
-                    options={{ headerShown: false }}
-                  />
-                </Stack>
-                <StatusBar style="dark" />
-              </JobViewProvider>
-            </SavedProvider>
-          </JobsProvider>
-        </ToastProvider>
-      </ThemeProviderCustom>
-    </ThemeProvider>
+    <GestureHandlerRootView>
+      <ThemeProvider value={LightTheme}>
+        <ThemeProviderCustom>
+          <ToastProvider>
+            <JobsProvider>
+              <SavedProvider>
+                <JobViewProvider>
+                  <Stack>
+                    <Stack.Screen
+                      name="(tabs)"
+                      options={{ headerShown: false }}
+                    />
+                  </Stack>
+                  <StatusBar style="dark" />
+                </JobViewProvider>
+              </SavedProvider>
+            </JobsProvider>
+          </ToastProvider>
+        </ThemeProviderCustom>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }
