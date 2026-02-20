@@ -6,6 +6,7 @@ import "react-native-reanimated";
 import { JobsProvider } from "./providers/JobsContext";
 import { ThemeProviderCustom } from "./providers/ThemeContext";
 import { ToastProvider } from "./providers/ToastContext";
+import { SavedProvider } from "./providers/SavedContext";
 
 export const unstable_settings = {
   anchor: "(tabs)",
@@ -29,10 +30,12 @@ export default function RootLayout() {
       <ThemeProviderCustom>
         <ToastProvider>
           <JobsProvider>
-            <Stack>
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            </Stack>
-            <StatusBar style="dark" />
+            <SavedProvider>
+              <Stack>
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              </Stack>
+              <StatusBar style="dark" />
+            </SavedProvider>
           </JobsProvider>
         </ToastProvider>
       </ThemeProviderCustom>
