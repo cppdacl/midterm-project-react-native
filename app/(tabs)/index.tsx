@@ -32,7 +32,6 @@ export default function HomeScreen() {
         backgroundColor={theme.background}
       />
 
-      {/* Header */}
       <View
         style={{
           flexDirection: "row",
