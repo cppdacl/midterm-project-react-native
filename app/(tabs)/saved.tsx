@@ -28,7 +28,7 @@ export default function SavedScreen() {
   const toggleTheme = () => setDark(!dark);
 
   return (
-    <SafeAreaView style={{ backgroundColor: theme.background }}>
+    <SafeAreaView style={{ backgroundColor: theme.background, flex: 1 }} edges={["top"]}>
       <StatusBar
         barStyle={dark ? "light-content" : "dark-content"}
         backgroundColor={theme.background}
