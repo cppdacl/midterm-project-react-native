@@ -81,6 +81,7 @@ export default function SavedScreen() {
             paddingHorizontal: 10,
             paddingBottom: 30,
           }}
+          style={{marginBottom: -35}}
           showsVerticalScrollIndicator={false}
         />
       )}

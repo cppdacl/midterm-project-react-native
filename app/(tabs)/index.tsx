@@ -75,6 +75,7 @@ export default function HomeScreen() {
             paddingHorizontal: 10,
             paddingBottom: 30,
           }}
+          style={{marginBottom: 80}}
           showsVerticalScrollIndicator={false}
         />
       )}
