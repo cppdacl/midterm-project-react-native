@@ -3,11 +3,12 @@ import { Linking, Text, TouchableOpacity, View, Image } from "react-native";
 import { useTheme } from "../../providers/ThemeContext";
 import { Job } from "../../providers/JobsContext";
 import { useSavedJobs } from "../../providers/SavedContext";
-import { useJobView } from "../../providers/JobViewContext"; // for opening modal
+import { useJobView } from "../../providers/JobViewContext";
 import { styles } from "./styles";
 
 type Props = {
   job: Job;
+  override?: string;
 };
 
 const toTitleCase = (text?: string) => {
@@ -19,10 +20,10 @@ const toTitleCase = (text?: string) => {
     .join(" ");
 };
 
-export default function JobCard({ job }: Props) {
+export default function JobCard({ job, override }: Props) {
   const { theme, dark } = useTheme();
   const { saveJob, removeJob, isJobSaved } = useSavedJobs();
-  const { openJob } = useJobView();
+  const { openJob, openApply } = useJobView();
 
   const saved = isJobSaved(job.uuid);
 
@@ -51,10 +52,9 @@ export default function JobCard({ job }: Props) {
   return (
     <TouchableOpacity
       activeOpacity={0.9}
-      onPress={() => openJob(job.uuid)} // open modal on card press
+      onPress={() => openJob(job.uuid)}
       style={[styles.card, { backgroundColor: dark ? "#1B1826" : "#F3F4F6" }]}
     >
-      {/* Top Row */}
       <View style={styles.topRow}>
         <Image
           source={{ uri: job.companyLogo }}
@@ -75,7 +75,6 @@ export default function JobCard({ job }: Props) {
         </View>
       </View>
 
-      {/* Details */}
       <View style={styles.details}>
         <Text style={[styles.meta, { color: theme.text }]}>
           {toTitleCase(job.workModel)} • {toTitleCase(job.jobType)} •{" "}
@@ -97,9 +96,7 @@ export default function JobCard({ job }: Props) {
         )}
       </View>
 
-      {/* Buttons */}
       <View style={styles.buttonRow}>
-        {/* Save Button */}
         <TouchableOpacity
           activeOpacity={0.8}
           style={[
@@ -107,20 +104,21 @@ export default function JobCard({ job }: Props) {
             { backgroundColor: saved ? theme.primary : "#6d6b74" },
           ]}
           onPress={(e) => {
-            e.stopPropagation(); // prevents triggering card onPress
+            e.stopPropagation();
             saved ? removeJob(job.uuid) : saveJob(job.uuid);
           }}
         >
-          <Text style={styles.buttonText}>{saved ? "Saved" : "Save Job"}</Text>
+          <Text style={styles.buttonText}>
+            {override ?? (saved ? "Saved" : "Save Job")}
+          </Text>
         </TouchableOpacity>
 
-        {/* Apply Button */}
         <TouchableOpacity
           activeOpacity={0.8}
           style={styles.applyButton}
           onPress={(e) => {
-            e.stopPropagation(); // prevents triggering card onPress
-            Linking.openURL(job.applicationLink);
+            e.stopPropagation();
+            openApply(job.uuid);
           }}
         >
           <Text style={styles.applyText}>Apply</Text>

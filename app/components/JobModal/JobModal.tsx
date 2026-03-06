@@ -36,22 +36,27 @@ const toTitleCase = (text?: string) => {
     .join(" ");
 };
 
-export default function JobModal() {
+type ApplyModalProps = {
+  jobUuid: string;
+};
+
+export default function JobModal({ jobUuid }: ApplyModalProps) {
   const { theme, dark } = useTheme();
   const { jobs } = useJobs();
-  const { currentJobUuid, closeJob } = useJobView();
+  const { closeJob } = useJobView();
   const { saveJob, removeJob, isJobSaved } = useSavedJobs();
+  const { openApply } = useJobView();
 
   const translateX = useSharedValue(SCREEN_WIDTH);
 
   useEffect(() => {
-    if (currentJobUuid) {
+    if (jobUuid) {
       translateX.value = withTiming(0, { duration: 300 });
     }
-  }, [currentJobUuid]);
+  }, [jobUuid]);
 
-  if (!currentJobUuid) return null;
-  const job = jobs.find((j) => j.uuid === currentJobUuid);
+  if (!jobUuid) return null;
+  const job = jobs.find((j) => j.uuid === jobUuid);
   if (!job) return null;
 
   const saved = isJobSaved(job.uuid);
@@ -223,8 +228,11 @@ export default function JobModal() {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.applyButton, { flex: 1, marginLeft: 10 }]}
-            onPress={() => Linking.openURL(job.applicationLink)}
+            style={[
+              styles.applyButton,
+              { flex: 1, marginLeft: 10, backgroundColor: theme.primary },
+            ]}
+            onPress={() => openApply(job.uuid)}
           >
             <Text style={styles.applyText}>Apply</Text>
           </TouchableOpacity>

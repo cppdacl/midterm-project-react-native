@@ -28,7 +28,10 @@ export default function SavedScreen() {
   const toggleTheme = () => setDark(!dark);
 
   return (
-    <SafeAreaView style={{ backgroundColor: theme.background, flex: 1 }} edges={["top"]}>
+    <SafeAreaView
+      style={{ backgroundColor: theme.background, flex: 1 }}
+      edges={["top"]}
+    >
       <StatusBar
         barStyle={dark ? "light-content" : "dark-content"}
         backgroundColor={theme.background}
@@ -76,12 +79,12 @@ export default function SavedScreen() {
         <FlatList
           data={filteredJobs}
           keyExtractor={(item) => item.uuid}
-          renderItem={({ item }) => <JobCard job={item} />}
+          renderItem={({ item }) => <JobCard job={item} override={"Unsave"} />}
           contentContainerStyle={{
             paddingHorizontal: 10,
             paddingBottom: 30,
           }}
-          style={{marginBottom: -35}}
+          style={{ marginBottom: -35 }}
           showsVerticalScrollIndicator={false}
         />
       )}

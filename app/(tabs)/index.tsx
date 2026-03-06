@@ -26,7 +26,10 @@ export default function HomeScreen() {
   const toggleTheme = () => setDark(!dark);
 
   return (
-    <SafeAreaView style={{ backgroundColor: theme.background, flex: 1 }} edges={["top"]}>
+    <SafeAreaView
+      style={{ backgroundColor: theme.background, flex: 1 }}
+      edges={["top"]}
+    >
       <StatusBar
         barStyle={dark ? "light-content" : "dark-content"}
         backgroundColor={theme.background}
@@ -75,7 +78,7 @@ export default function HomeScreen() {
             paddingHorizontal: 10,
             paddingBottom: 30,
           }}
-          style={{marginBottom: 80}}
+          style={{ marginBottom: -38 }}
           showsVerticalScrollIndicator={false}
         />
       )}
